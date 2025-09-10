@@ -1,10 +1,10 @@
-package dao;
+package com.example.jana.dao;
 
-import model.Admin;
-import model.Comum;
-import model.Usuario;
-import model.enums.Perfil;
-import utils.DatabaseUtils;
+import com.example.jana.model.user.UsuarioAdmin;
+import com.example.jana.model.user.UsuarioComum;
+import com.example.jana.model.user.Usuario;
+import com.example.jana.model.enums.user.Perfil;
+import com.example.jana.utils.DatabaseUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +24,7 @@ public class UserDao {
             while(result.next()){
                 Perfil perfil = Perfil.valueOf(result.getString("perfil"));
                 if(perfil==Perfil.ADMIN){
-                        var usuario = new Admin(
+                        var usuario = new UsuarioAdmin(
                                 result.getInt("id"),
                                 result.getString("nome"),
                                 result.getString("matricula"),
@@ -33,7 +33,7 @@ public class UserDao {
                         );
                     usuarios.add(usuario);
                 } else{
-                    var usuario = new Comum(result.getInt("id"),
+                    var usuario = new UsuarioComum(result.getInt("id"),
                             result.getString("nome"),
                             result.getString("matricula"),
                             result.getString("email"),
